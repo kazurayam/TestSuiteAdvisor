@@ -19,12 +19,13 @@ I do not want to wait for the `TC3` to finish after 20 minutes.
 
 However Katalon Studio does not support the feature to stop a Test Suite when a comprising Test Case failed.
 
-What else can I do to make the Test Suite finish as soon as a Test Case failed?
+What else can I do practically to let a Test Suite to finish as soon as a Test Case failed?
 
 ## Solution
 
-A *Copernican Revolution* is required. Do not ask Katalon Studio to control it. Rather *each Test Cases determine 
-if they continue or abandon*.
+A *Copernican Revolution* is required. 
+Do not ask Katalon Studio to control it, which I think is not likely to be ever implemented. 
+Rather *each Test Cases determine if they continue or abandon*, which you can achieve yourself.
 
 I will introduce a `GlobalVariable.ONE_OR_MORE_TESTCASES_FAILED` of Boolean type, with the initial value of `false`.
 

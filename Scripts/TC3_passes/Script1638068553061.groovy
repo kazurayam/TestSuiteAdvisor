@@ -1,12 +1,7 @@
+import com.kazurayam.ks.main.ShouldBreak
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-import internal.GlobalVariable as GlobalVariable
-import com.kms.katalon.core.util.KeywordUtil
-
-if (GlobalVariable.ONE_OR_MORE_TESTCASES_FAILED) {
-	KeywordUtil.markWarning("abandoned")
-	return;
-}
+if (ShouldBreak.check()) return;
 
 WebUI.comment("TC3 ran")
 
