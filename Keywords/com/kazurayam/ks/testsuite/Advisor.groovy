@@ -1,37 +1,41 @@
-package com.kazurayam.ks.main
+package com.kazurayam.ks.testsuite
 
 import java.nio.file.Files
 import java.nio.file.Path
 
 import com.kms.katalon.core.context.TestCaseContext
+import com.kazurayam.ks.globalvariable.ExpandoGlobalVariable
+import com.kms.katalon.core.util.KeywordUtil
 
 import groovy.json.JsonSlurper
 
 
-public class TestSuiteProgress {
+public class Advisor {
 
-	private List<TestSuiteProgressEntry> entries
+	public static final String PROPERTY_NAME = "test_suite_progress"
 
-	TestSuiteProgress() {
-		this.entries = new ArrayList<TestSuiteProgressEntry>()
+	private List<ProgressEntry> entries
+
+	Advisor() {
+		this.entries = new ArrayList<ProgressEntry>()
 	}
 
-	TestSuiteProgress(Path testCaseBinding) {
+	Advisor(Path testCaseBinding) {
 		this.entries = loadFile(testCaseBinding)
 	}
 
-	private List<TestSuiteProgressEntry> loadFile(Path testCaseBinding) {
+	private List<ProgressEntry> loadFile(Path testCaseBinding) {
 		Objects.requireNonNull(testCaseBinding)
 		assert Files.exists(testCaseBinding)
-		List<TestSuiteProgressEntry> entries = new ArrayList<TestSuiteProgressEntry>()
+		List<ProgressEntry> entries = new ArrayList<ProgressEntry>()
 		testCaseBinding.toFile().eachLine { String line ->
 			JsonSlurper slurper = new JsonSlurper()
 			Map object = slurper.parseText(line)
-			TestSuiteProgressEntry entry
+			ProgressEntry entry
 			if (object.bindedValues) {
-				entry = new TestSuiteProgressEntry(object.testCaseName, object.testCaseId)
+				entry = new ProgressEntry(object.testCaseName, object.testCaseId)
 			} else {
-				entry = new TestSuiteProgressEntry(object.testCaseName, object.testCaseId, object.bindedValues)
+				entry = new ProgressEntry(object.testCaseName, object.testCaseId, object.bindedValues)
 			}
 			entries.add(entry)
 		}
@@ -55,5 +59,14 @@ public class TestSuiteProgress {
 				.filter({ !it.isPassed() })
 				.collect()
 				.size() > 0)
+	}
+
+	static boolean shouldBreak() {
+		Advisor progress = ExpandoGlobalVariable.getPropertyValue(Advisor.PROPERTY_NAME)
+		boolean oneOrMoreFailures = progress.oneOrMorePreviousTestCasesHaveFailed()
+		if (oneOrMoreFailures) {
+			KeywordUtil.markWarning("should break")
+		}
+		return oneOrMoreFailures
 	}
 }

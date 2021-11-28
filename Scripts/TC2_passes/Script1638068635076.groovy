@@ -1,7 +1,7 @@
-import com.kazurayam.ks.main.ShouldBreak
+import com.kazurayam.ks.testsuite.Advisor
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-if (ShouldBreak.check()) return;
+if (Advisor.shouldBreak()) return;
 
 WebUI.comment("TC2 ran")
 

@@ -4,14 +4,4 @@
    <name>default</name>
    <tag></tag>
    <defaultProfile>true</defaultProfile>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>false</initValue>
-      <name>ONE_OR_MORE_TESTCASES_FAILED</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>null</initValue>
-      <name>PROGRESS</name>
-   </GlobalVariableEntity>
 </GlobalVariableEntities>

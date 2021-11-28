@@ -1,4 +1,4 @@
-package com.kazurayam.ks.main
+package com.kazurayam.ks.testsuite
 
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
@@ -20,30 +20,30 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import internal.GlobalVariable
 
-public class TestSuiteProgressEntry {
+public class ProgressEntry {
 
 	private static String testCaseName
 	private static String testCaseId
 	private static Map<String, String> bindedValues
 	private static Boolean passed     // TestCaseStatus:"PASSED" -> true, "FAILED" -> false
-	
-	TestSuiteProgressEntry(String testCaseName, String testCaseId, Map<String, String> bindedValues) {
+
+	ProgressEntry(String testCaseName, String testCaseId, Map<String, String> bindedValues) {
 		this.testCaseName = testCaseName
 		this.testCaseId = testCaseId
 		this.bindedValues = bindedValues
 		this.passed = true
 	}
-	
-	TestSuiteProgressEntry(String testCaseName, String testCaseId) {
+
+	ProgressEntry(String testCaseName, String testCaseId) {
 		this(testCaseName, testCaseId, null)
 	}
-	
+
 	void setPassed(boolean passed) {
 		this.passed = passed
 	}
-	
+
 	boolean isPassed() {
 		return this.passed
 	}
-	
+
 }
