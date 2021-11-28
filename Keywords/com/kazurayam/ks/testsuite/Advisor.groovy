@@ -3,6 +3,7 @@ package com.kazurayam.ks.testsuite
 import java.nio.file.Files
 import java.nio.file.Path
 
+import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.context.TestCaseContext
 import com.kazurayam.ks.globalvariable.ExpandoGlobalVariable
 import com.kms.katalon.core.util.KeywordUtil
@@ -15,6 +16,17 @@ public class Advisor {
 	public static final String PROPERTY_NAME = "test_suite_progress"
 
 	private List<ProgressEntry> entries
+
+	@Keyword
+	static boolean shouldBreak() {
+		Advisor progress = ExpandoGlobalVariable.getPropertyValue(Advisor.PROPERTY_NAME)
+		assert progress != null
+		boolean oneOrMoreFailures = progress.oneOrMorePreviousTestCasesHaveFailed()
+		if (oneOrMoreFailures) {
+			KeywordUtil.markWarning("should break")
+		}
+		return oneOrMoreFailures
+	}
 
 	Advisor() {
 		this.entries = new ArrayList<ProgressEntry>()
@@ -61,12 +73,4 @@ public class Advisor {
 				.size() > 0)
 	}
 
-	static boolean shouldBreak() {
-		Advisor progress = ExpandoGlobalVariable.getPropertyValue(Advisor.PROPERTY_NAME)
-		boolean oneOrMoreFailures = progress.oneOrMorePreviousTestCasesHaveFailed()
-		if (oneOrMoreFailures) {
-			KeywordUtil.markWarning("should break")
-		}
-		return oneOrMoreFailures
-	}
 }
