@@ -1,9 +1,10 @@
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable as GlobalVariable
+import com.kms.katalon.core.util.KeywordUtil
 
 if (GlobalVariable.ONE_OR_MORE_TESTCASES_FAILED) {
-	WebUI.comment("TC1 abandoned")
+	KeywordUtil.markWarning("abandoned")
 	return;
 }
 
