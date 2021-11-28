@@ -42,7 +42,7 @@ TestSuiteAdvisor internally depends on the [ExecutionProfilesLoader](https://git
 
 #### Test Cases
 
-```java:Scripts/TC1_passes/.groovy
+```java:Scripts/TC1_passes/Script1638068375427.groovy
 ```
 
 #### Test Listener
