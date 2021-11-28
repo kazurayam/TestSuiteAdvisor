@@ -23,17 +23,28 @@ What else can I do practically to let a Test Suite to finish as soon as a Test C
 ## Solution
 
 I will not ask Katalon Studio to control if it should invoke each Test Cases (TC1, TC2, TC3) or not.
+I will let it invoke all Test Cases in a Test Suite as defined.
 
-Rather, I would write *each Test Cases to check if any of preceding Test Cases has failed*. 
-If they any failed, then they should quit immediately before executing the body of test processes.
+Rather, I would write *each Test Cases to check if any of preceding Test Cases in the Test Suite has failed*. 
+If there are any failed Test Cases, then a Test Case should quit immediately. A Test Case should check it before executing the body of test processes to prevent consuming time. Test Cases can be self-deterministic if it is informed if any of its preceding Test Cases in a Test Suite has failed or not.
 
-How a Test Case can find if any of its preceding Test Cases in a Test Suite failed? --- I will introduce 
+I will introduce a few Groovy classes that implements *Self-deterministic Test Cases in Test Suite*. A jar file that includes the module will be provided.
 
+## How to use this
 
-## Description
+### Dependencies
 
+At the [Releases](https://github.com/kazurayam/TestSuiteAdvisor/releases) page, you can download the jar of `TestSuiteAdvizor-x.x.x.jar`. You want to copy that jar into your project's `Drivers` folder.
 
+TestSuiteAdvisor internally depends on the [ExecutionProfilesLoader](https://github.com/kazurayam/ExecutionProfilesLoader/releases) project's jar. You want to copy the jar into your project's `Drivers' folder as well.
 
+### How to write your code
 
-You want instroduce a `GlobalVariable.ONE_OR_MORE_TESTCASE_FAILED`. Initial initial value should be `false`.
+#### Test Cases
+
+``` java:Scripts/TC1_passes/Script1638068375427.groovy
+```
+
+#### Test Listener
+
 

@@ -18,12 +18,12 @@ public class Advisor {
 	private List<ProgressEntry> entries
 
 	@Keyword
-	static boolean shouldBreak() {
+	static boolean shouldQuit() {
 		Advisor progress = ExpandoGlobalVariable.getPropertyValue(Advisor.PROPERTY_NAME)
 		assert progress != null
 		boolean oneOrMoreFailures = progress.oneOrMorePreviousTestCasesHaveFailed()
 		if (oneOrMoreFailures) {
-			KeywordUtil.markWarning("should break")
+			KeywordUtil.markWarning("should quit")
 		}
 		return oneOrMoreFailures
 	}
@@ -72,5 +72,4 @@ public class Advisor {
 				.collect()
 				.size() > 0)
 	}
-
 }
